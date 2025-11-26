@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.E.Z.Z.Y.M.I.E</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: #e8e8e8;
+            font-family: 'Courier New', monospace;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            border-bottom: 2px solid #333;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .title {
+            font-size: 2.5em;
+            color: #00ff88;
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        /* Кнопка автора в правом верхнем углу */
+        .author-corner-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #2a4d7a;
+            color: white;
+            border: 1px solid #4a76a8;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .author-corner-btn:hover {
+            background: #4a76a8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(74, 118, 168, 0.4);
+        }
+
+        /* Верхние кнопки по центру */
+        .top-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .top-btn {
+            background: #ffd700;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .top-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .top-btn.wrgm {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .top-btn.wrgm:hover {
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .author-corner-btn {
+                top: 10px;
+                right: 10px;
+                padding: 6px 10px;
+                font-size: 0.7em;
+            }
+            
+            .top-buttons {
+                gap: 10px;
+            }
+            
+            .top-btn {
+                padding: 8px 16px;
+                font-size: 0.8em;
+            }
+        }
+
+        .panel {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+        }
+
+        .panel-title {
+            color: #00ff88;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .artifact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #0d0d0d;
+            border-radius: 4px;
+        }
+
+        .artifact-item {
+            background: #262626;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .artifact-item:hover {
+            border-color: #00ff88;
+            transform: translateY(-2px);
+            box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .artifact-item.selected {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: #00ff88;
+        }
+
+        .artifact-image {
+            width: 100%;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            background: #1a1a1a;
+            padding: 5px;
+        }
+
+        .artifact-name {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .artifact-effects {
+            font-size: 0.75em;
+            color: #888;
+        }
+
+        .positive {
+            color: #00ff88;
+        }
+
+        .negative {
+            color: #ff4444;
+        }
+
+        .selected-artifacts {
+            min-height: 100px;
+            background: #0d0d0d;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .selected-item {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid #00ff88;
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin: 5px;
+            font-size: 0.9em;
+            gap: 10px;
+        }
+
+        .item-count {
+            background: rgba(0, 255, 136, 0.8);
+            color: #000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .count-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 5px;
+        }
+
+        .count-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+        }
+
+        .count-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .stats-panel {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .comparison-panel {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .comparison-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .build-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 12px;
+            background: #262626;
+            border-radius: 4px;
+            border: 1px solid #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .build-checkbox:hover {
+            border-color: #00ff88;
+        }
+
+        .build-checkbox.checked {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .build-checkbox input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .comparison-col {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .comparison-header {
+            text-align: center;
+            padding: 15px;
+            border-radius: 6px;
+            background: #262626;
+            border: 2px solid #333;
+            position: relative;
+        }
+
+        .comparison-header.inactive {
+            opacity: 0.5;
+            border-style: dashed;
+        }
+
+        .comparison-stats {
+            background: #0d0d0d;
+            border-radius: 6px;
+            padding: 15px;
+            min-height: 200px;
+        }
+
+        .comparison-stats.inactive {
+            opacity: 0.5;
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #262626;
+        }
+
+        .stat-name {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stat-value {
+            font-weight: bold;
+        }
+
+        .better {
+            color: #00ff88;
+            font-weight: bold;
+        }
+
+        .worse {
+            color: #ff4444;
+            font-weight: bold;
+        }
+
+        .equal {
+            color: #888;
+        }
+
+        .radiation-display {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .radiation-bad {
+            background: rgba(255, 68, 68, 0.1);
+            border-color: #ff4444;
+        }
+
+        .radiation-warning {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: #ffd700;
+        }
+
+        .radiation-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .radiation-item {
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .radiation-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .radiation-good .radiation-value {
+            color: #00ff88;
+        }
+
+        .radiation-bad .radiation-value {
+            color: #ff4444;
+        }
+
+        .radiation-label {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .radiation-total {
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #333;
+            margin-top: 10px;
+        }
+
+        .total-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .total-good {
+            color: #00ff88;
+        }
+
+        .total-bad {
+            color: #ff4444;
+        }
+
+        .total-neutral {
+            color: #ffd700;
+        }
+
+        .radiation-message {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn {
+            background: #00ff88;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 136, 0.4);
+        }
+
+        .btn-clear {
+            background: #ff4444;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+        }
+
+        .btn-compare {
+            background: #4a76a8;
+            color: white;
+        }
+
+        .btn-compare:hover {
+            box-shadow: 0 4px 15px rgba(74, 118, 168, 0.4);
+        }
+
+        .btn-save {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .btn-save:hover {
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        }
+
+        .icon {
+            font-size: 1.2em;
+        }
+
+        .total-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-card.positive {
+            border-color: #00ff88;
+        }
+
+        .stat-card.negative {
+            border-color: #ff4444;
+        }
+
+        .stat-value-large {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+
+        .artifact-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 5px;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .add-btn {
+            background: #00ff88;
+            color: #000;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8em;
+        }
+
+        .quick-add {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        .quick-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #404040;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.7em;
+        }
+
+        .quick-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            border-top: 1px solid #333;
+            color: #666;
+        }
+
+        .author-link {
+            color: #00ff88;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .author-link:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .donate-link {
+            color: #ffd700;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .donate-link:hover {
+            color: #ffaa00;
+            text-decoration: underline;
+        }
+
+        .wrgm-link {
+            color: #ff6b6b;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: bold;
+        }
+
+        .wrgm-link:hover {
+            color: #ff8e8e;
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            padding: 10px;
+        }
+
+        /* Стили для скроллбара */
+        .artifact-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .artifact-grid::-webkit-scrollbar-track {
+            background: #0d0d0d;
+            border-radius: 4px;
+        }
+
+        .artifact-grid::-webkit-scrollbar-thumb {
+            background: #00ff88;
+            border-radius: 4px;
+        }
+
+        .artifact-grid::-webkit-scrollbar-thumb:hover {
+            background: #00cc6a;
+        }
+
+        /* Стиль для артефактов без изображений */
+        .no-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1a1a1a;
+            color: #666;
+            font-size: 2em;
+            border: 1px dashed #404040;
+        }
+
+        /* Счетчик артефактов */
+        .artifact-counter {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #00ff88;
+            color: #000;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
+        }
+
+        .belt-counter {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 6px;
+            border: 1px solid #00ff88;
+        }
+
+        .counter-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .counter-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #00ff88;
+        }
+
+        .counter-label {
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        /* Управление сборками */
+        .builds-management {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .build-name-input {
+            flex: 1;
+            padding: 8px;
+            background: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            min-width: 150px;
+        }
+
+        .saved-builds {
+            margin-top: 15px;
+        }
+
+        .saved-build-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #262626;
+            border: 1px solid #333;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .saved-build-item:hover {
+            border-color: #00ff88;
+            background: #2a2a2a;
+        }
+
+        .build-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.7em;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Цвета для сборок */
+        .build-color-1 { border-color: #00ff88; }
+        .build-color-2 { border-color: #ffd700; }
+        .build-color-3 { border-color: #ff6b6b; }
+        .build-color-4 { border-color: #4a76a8; }
+        .build-color-5 { border-color: #9b59b6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Кнопка автора в правом верхнем углу -->
+        <a href="https://vk.com/frolik3" class="author-corner-btn" target="_blank" title="Автор проекта">
+            👤 Автор
+        </a>
+
+        <!-- Счетчик артефактов в левом верхнем углу -->
+        <div class="artifact-counter" id="artifactCounter" style="display: none;">
+            🎒 <span id="totalCount">0</span> артов
+        </div>
+
+        <div class="header">
+            <div class="title">B.E.Z.Z.Y.M.I.E</div>
+            <div class="subtitle">[RU]BezzymiePVE|Stalker</div>
+            
+            <!-- Верхние кнопки по центру -->
+            <div class="top-buttons">
+                <a href="https://bezzymiepve.online/" class="top-btn" target="_blank">
+                    <span class="icon">💰</span> ДОНАТ МАГАЗИН
+                </a>
+                <a href="https://wargm.ru/server/77058" class="top-btn wrgm" target="_blank">
+                    <span class="icon">🎯</span> WRGM
+                </a>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="panel">
+                <div class="panel-title">
+                    <span class="icon">⚡</span>
+                    ДОСТУПНЫЕ АРТЕФАКТЫ
+                </div>
+                
+                <input type="text" class="search-box" placeholder="Поиск артефактов..." id="searchArtifacts">
+                
+                <div class="artifact-grid" id="artifactList">
+                    <!-- Артефакты будут загружены через JavaScript -->
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-title">
+                    <span class="icon">🎒</span>
+                    ВАШ РЕМЕНЬ
+                </div>
+                
+                <!-- Счетчики в ремне -->
+                <div class="belt-counter" id="beltCounter" style="display: none;">
+                    <div class="counter-item">
+                        <div class="counter-value" id="uniqueCount">0</div>
+                        <div class="counter-label">уникальных</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value" id="totalBeltCount">0</div>
+                        <div class="counter-label">всего артов</div>
+                    </div>
+                </div>
+                
+                <!-- Управление сборками -->
+                <div class="builds-management">
+                    <input type="text" class="build-name-input" id="buildName" placeholder="Название сборки" maxlength="20">
+                    <button class="btn btn-save" onclick="saveBuild()">
+                        <span class="icon">💾</span> СОХРАНИТЬ
+                    </button>
+                    <button class="btn btn-compare" onclick="showComparison()">
+                        <span class="icon">⚖️</span> СРАВНИТЬ
+                    </button>
+                </div>
+
+                <div class="selected-artifacts" id="selectedArtifacts">
+                    <!-- Выбранные артефакты появятся здесь -->
+                    <div style="text-align: center; color: #666; padding: 20px;">
+                        Выберите артефакты из списка слева
+                    </div>
+                </div>
+
+                <!-- Список сохраненных сборок -->
+                <div class="saved-builds" id="savedBuilds">
+                    <!-- Сохраненные сборки появятся здесь -->
+                </div>
+
+                <div class="controls">
+                    <button class="btn" onclick="calculateStats()">
+                        <span class="icon">📊</span> РАССЧИТАТЬ
+                    </button>
+                    <button class="btn btn-clear" onclick="clearSelection()">
+                        <span class="icon">🗑️</span> ОЧИСТИТЬ
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-panel" id="statsPanel" style="display: none;">
+            <div class="panel-title">
+                <span class="icon">📈</span>
+                СТАТИСТИКА КОМБИНАЦИИ
+            </div>
+            
+            <div id="radiationInfo"></div>
+            
+            <div class="total-stats" id="totalStats">
+                <!-- Статистика будет загружена здесь -->
+            </div>
+            
+            <div class="stats-details">
+                <div class="panel-title" style="margin-top: 20px;">
+                    <span class="icon">✅</span>
+                    ПОЛОЖИТЕЛЬНЫЕ ЭФФЕКТЫ
+                </div>
+                <div id="positiveEffects"></div>
+                
+                <div class="panel-title" style="margin-top: 20px;">
+                    <span class="icon">❌</span>
+                    ОТРИЦАТЕЛЬНЫЕ ЭФФЕКТЫ
+                </div>
+                <div id="negativeEffects"></div>
+            </div>
+        </div>
+
+        <!-- Панель сравнения -->
+        <div class="comparison-panel" id="comparisonPanel">
+            <div class="panel-title">
+                <span class="icon">⚖️</span>
+                СРАВНЕНИЕ СБОРОК (до 5 одновременно)
+            </div>
+            
+            <!-- Управление выбором сборок для сравнения -->
+            <div class="comparison-controls" id="comparisonControls">
+                <!-- Чекбоксы для выбора сборок появятся здесь -->
+            </div>
+            
+            <div class="comparison-grid" id="comparisonGrid">
+                <!-- Сравнение будет загружено здесь -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-clear" onclick="hideComparison()">
+                    <span class="icon">←</span> НАЗАД
+                </button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Создано сталкером для сталкеров</p>
+            <div class="footer-links">
+                <div class="footer-section">
+                    <strong>Автор:</strong><br>
+                    <a href="https://vk.com/frolik3" class="author-link" target="_blank">https://vk.com/frolik3</a>
+                </div>
+                <div class="footer-section">
+                    <strong>Донат магазин:</strong><br>
+                    <a href="https://bezzymiepve.online/" class="donate-link" target="_blank">https://bezzymiepve.online/</a>
+                </div>
+                <div class="footer-section">
+                    <strong>WRGM Сервер:</strong><br>
+                    <a href="https://wargm.ru/server/77058" class="wrgm-link" target="_blank">https://wargm.ru/server/77058</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // База данных артефактов с иконками
+        const artifactsDB = {
+            "Компас": {"вывод_радиации": 70, "вода": -40, "еда": -40, icon: "🧭"},
+            "Сердце оазиса": {"еда": 200, "накопление_радиации": 20, "вода": -50, icon: "💚"},
+            "Фонтан": {"вода": 200, "накопление_радиации": 20, "еда": -50, icon: "⛲"},
+            "Жаба": {"вода": 100, "накопление_радиации": 10, "еда": -50, icon: "🐸"},
+            "Ночная Звезда": {"вывод_радиации": 35, "вода": -20, "еда": -20, icon: "🌠"},
+            "Ломоть Мяса": {"еда": 100, "вода": -50, "накопление_радиации": 10, icon: "🥩"},
+            "Бархат": {"вывод_радиации": 60, "кровь": 50, "еда": 100, "здоровье": -3, "вода": -100, icon: "🟤"},
+            "Батарейка": {"вода": 150, "накопление_радиации": 20, "кровь": -20, "шок": -50, "здоровье": -2, icon: "🔋"},
+            "Белый обруч": {"шок": 10, "кровь": -10, "накопление_радиации": 10, icon: "⭕"},
+            "Браслет": {"вывод_радиации": 30, "кровь": -10, "здоровье": -2, icon: "📿"},
+            "Булавка": {"вода": 100, "еда": 100, "накопление_радиации": 20, "кровь": -10, "шанс_пореза": 50, icon: "📌"},
+            "Виноград": {"кровь": 150, "накопление_радиации": 30, "здоровье": -5, icon: "🍇"},
+            "Вспышка": {"кровь": 30, "еда": 10, "вода": 10, "накопление_радиации": 10, "шок": -80, icon: "⚡"},
+            "Выверт": {"кровь": 20, "здоровье": 1, "вода": 50, "еда": -50, "накопление_радиации": 40, icon: "🌀"},
+            "Гаргона": {"кровь": 20, "еда": 20, "вода": 20, "здоровье": 1, "шок": -50, "накопление_радиации": 50, icon: "🐍"},
+            "Генератор": {"здоровье": 1, "вода": 100, "кровь": -50, "накопление_радиации": 10, icon: "🔌"},
+            "Гравий": {"вода": 50, "еда": 50, "здоровье": -1, "накопление_радиации": 20, icon: "🪨"},
+            "Джейбк": {"здоровье": 5, "вода": 40, "еда": -20, "кровь": -100, "накопление_радиации": 20, icon: "💉"},
+            "Диабло": {"кровь": 50, "накопление_радиации": 20, "здоровье": -2, "вода": -50, icon: "😈"},
+            "Золотая Рыбка": {"здоровье": 15, "накопление_радиации": 20, "кровь": -20, icon: "🐠"},
+            "Зуда": {"здоровье": 2, "накопление_радиации": 10, "кровь": -10, "шок": -10, "вода": -10, "еда": -10, icon: "🦠"},
+            "Штурвал": {"кровь": 50, "накопление_радиации": 20, "здоровье": -1, icon: "⚓"},
+            "Кислушка": {"вода": 20, "еда": 100, "накопление_радиации": 20, "здоровье": -4, icon: "🍋"},
+            "Клевер": {"здоровье": 2, "еда": 100, "лечение_пореза": 30, "вода": -70, "кровь": -50, "накопление_радиации": 30, icon: "🍀"},
+            "Клякса": {"кровь": 70, "вода": 100, "шок": 10, "накопление_радиации": 100, "здоровье": -2, icon: "🖤"},
+            "Кокон": {"кровь": 20, "накопление_радиации": 20, "шок": -40, icon: "🪰"},
+            "Луна": {"вывод_радиации": 30, "здоровье": 1, "кровь": -20, "вода": -50, "еда": -50, icon: "🌙"},
+            "Крест": {"вывод_радиации": 10, "кровь": 100, "еда": 50, "вода": -200, "здоровье": -4, icon: "✝️"},
+            "Крис Звезда": {"здоровье": 3, "вода": 30, "накопление_радиации": 30, "кровь": -100, "еда": -10, icon: "⭐"},
+            "Летучая Мышь": {"вода": 100, "накопление_радиации": 10, "кровь": -100, icon: "🦇"},
+            "Мамины Бусы": {"кровь": 100, "накопление_радиации": 20, "здоровье": -3, icon: "📿"},
+            "Маяк": {"здоровье": 1, "вода": 40, "еда": 40, "накопление_радиации": 20, "шок": -10, "кровь": -80, icon: "🗼"},
+            "Медальон": {"кровь": 100, "еда": 10, "накопление_радиации": 20, "здоровье": -5, icon: "🪙"},
+            "Медуза": {"вода": 20, "еда": 20, "накопление_радиации": 10, "шок": -10, "здоровье": -1, icon: "🎐"},
+            "Шар": {"еда": 10, "вода": 10, "кровь": 10, "накопление_радиации": 20, "шок": -20, icon: "🔮"},
+            "Ожерелье": {"кровь": 200, "еда": 10, "здоровье": -15, "накопление_радиации": 50, icon: "📿"},
+            "Панцирь": {"кровь": 10, "шок": 10, "вода": -50, "еда": -100, "накопление_радиации": 20, icon: "🐢"},
+            "Перстень": {"кровь": 20, "шок": 20, "накопление_радиации": 20, "здоровье": -3, "еда": -50, icon: "💍"},
+            "Песчаник": {"кровь": 50, "шок": 10, "здоровье": 3, "накопление_радиации": 150, "вода": -100, "еда": -100, icon: "🏜️"},
+            "Пламя": {"вода": 10, "еда": 100, "накопление_радиации": 10, "кровь": -10, "здоровье": -1, icon: "🔥"},
+            "Полная Пустышка": {"еда": 30, "вода": 30, "здоровье": -1, "кровь": -20, "накопление_радиации": 10, icon: "🫙"},
+            "Призрачное Сердце": {"здоровье": 3, "накопление_радиации": 10, "кровь": -10, icon: "👻"},
+            "Проволка": {"лечение_пореза": 100, "кровь": -20, "здоровье": -2, "накопление_радиации": 20, icon: "🔗"},
+            "Пузырь": {"здоровье": 2, "кровь": 10, "вода": -300, "накопление_радиации": 30, icon: "🫧"},
+            "Репейник": {"лечение_пореза": 50, "здоровье": -1, "кровь": -10, "накопление_радиации": 10, icon: "🌿"},
+            "Светляк": {"кровь": -20, "шок": 50, "накопление_радиации": 20, icon: "✨"},
+            "Серафим": {"вода": 50, "еда": 50, "кровь": -20, "шок": -30, "накопление_радиации": 20, icon: "👼"},
+            "Серпантин": {"еда": 100, "вода": 100, "шок": 10, "накопление_радиации": 20, icon: "🐍"},
+            "Смерть Лампа": {"кровь": 50, "здоровье": -1, "накопление_радиации": 10, icon: "💀"},
+            "Солнце": {"кровь": 40, "вывод_радиации": 20, "вода": 40, "здоровье": -5, icon: "☀️"},
+            "Цепь": {"здоровье": 1, "шанс_пореза": 50, "кровь": -30, "накопление_радиации": 10, icon: "⛓️"},
+            "Череп Скряги": {"здоровье": 2, "еда": 200, "шок": -10, "кровь": -100, "накопление_радиации": 20, icon: "💀"},
+            "Ангел": {"здоровье": 2, "вода": -40, "еда": -100, "накопление_радиации": 10, icon: "👼"},
+            "Чипсы": {"еда": 100, "вода": -70, "кровь": -10, "накопление_радиации": 10, "здоровье": -1, icon: "🍟"},
+            "Черные Брызги": {"здоровье": 0.5, "кровь": -20, "накопление_радиации": 20, icon: "🎯"},
+            "Четки": {"вода": 50, "еда": 50, "здоровье": -1, "кровь": -10, "накопление_радиации": 20, icon: "📿"},
+            "Шкатулка": {"вода": 50, "еда": 50, "кровь": 20, "здоровье": -2, "накопление_радиации": 30, icon: "🎁"},
+            "Колючка": {"кровь": 20, "здоровье": 2, "вода": 50, "еда": 20, "шанс_пореза": 100, "накопление_радиации": 10, icon: "🌵"},
+            "Пленка": {"лечение_пореза": 20, "еда": 20, "кровь": -50, "вода": -20, "накопление_радиации": 10, icon: "🎞️"}
+        };
+
+        // Иконки для эффектов
+        const effectIcons = {
+            "вывод_радиации": "☢️",
+            "накопление_радиации": "☢️",
+            "вода": "💧",
+            "еда": "🍖",
+            "кровь": "🩸",
+            "здоровье": "❤️",
+            "шок": "⚡",
+            "лечение_пореза": "🩹",
+            "шанс_пореза": "🔪"
+        };
+
+        // Цвета для сборок
+        const buildColors = ['build-color-1', 'build-color-2', 'build-color-3', 'build-color-4', 'build-color-5'];
+
+        let selectedArtifacts = {};
+        let savedBuilds = JSON.parse(localStorage.getItem('savedBuilds')) || [];
+        let currentBuildName = '';
+        let comparedBuilds = []; // Массив ID сборок для сравнения
+
+        // Функция для обновления счетчиков
+        function updateCounters() {
+            const totalCount = Object.values(selectedArtifacts).reduce((sum, count) => sum + count, 0);
+            const uniqueCount = Object.keys(selectedArtifacts).length;
+
+            // Обновляем счетчик в левом верхнем углу
+            const artifactCounter = document.getElementById('artifactCounter');
+            const totalCountElement = document.getElementById('totalCount');
+            
+            if (totalCount > 0) {
+                artifactCounter.style.display = 'block';
+                totalCountElement.textContent = totalCount;
+            } else {
+                artifactCounter.style.display = 'none';
+            }
+
+            // Обновляем счетчики в ремне
+            const beltCounter = document.getElementById('beltCounter');
+            const uniqueCountElement = document.getElementById('uniqueCount');
+            const totalBeltCountElement = document.getElementById('totalBeltCount');
+            
+            if (totalCount > 0) {
+                beltCounter.style.display = 'flex';
+                uniqueCountElement.textContent = uniqueCount;
+                totalBeltCountElement.textContent = totalCount;
+            } else {
+                beltCounter.style.display = 'none';
+            }
+        }
+
+        // Функция для определения цвета эффекта
+        function getEffectClass(effect, value) {
+            if (effect === "вывод_радиации") {
+                return value > 0 ? "positive" : "negative";
+            } else if (effect === "накопление_радиации") {
+                return value > 0 ? "negative" : "positive";
+            } else {
+                return value > 0 ? "positive" : "negative";
+            }
+        }
+
+        // Функция для отображения значения эффекта
+        function formatEffectValue(effect, value) {
+            if (value > 0) {
+                return `+${value}`;
+            } else {
+                return `${value}`;
+            }
+        }
+
+        // Инициализация списка артефактов
+        function initArtifactList() {
+            const artifactList = document.getElementById('artifactList');
+            artifactList.innerHTML = '';
+
+            Object.keys(artifactsDB).forEach(artifactName => {
+                const artifact = artifactsDB[artifactName];
+                const artifactElement = document.createElement('div');
+                artifactElement.className = 'artifact-item';
+                
+                let effectsHTML = '';
+                Object.entries(artifact).forEach(([effect, value]) => {
+                    if (effect === 'icon') return; // Пропускаем иконку
+                    const effectClass = getEffectClass(effect, value);
+                    const formattedValue = formatEffectValue(effect, value);
+                    effectsHTML += `
+                        <div class="${effectClass}">
+                            ${effectIcons[effect] || '⚡'} ${formatEffectName(effect)}: ${formattedValue}
+                        </div>
+                    `;
+                });
+
+                artifactElement.innerHTML = `
+                    <div class="artifact-image no-image">${artifact.icon || '⚡'}</div>
+                    <div class="artifact-name">${artifactName}</div>
+                    <div class="artifact-effects">
+                        ${effectsHTML}
+                    </div>
+                    <div class="artifact-quantity">
+                        <input type="number" class="quantity-input" id="quantity-${artifactName}" value="1" min="1" max="99">
+                        <button class="add-btn" onclick="addArtifact('${artifactName}')">
+                            Добавить
+                        </button>
+                    </div>
+                    <div class="quick-add">
+                        <button class="quick-btn" onclick="quickAdd('${artifactName}', 1)">+1</button>
+                        <button class="quick-btn" onclick="quickAdd('${artifactName}', 3)">+3</button>
+                        <button class="quick-btn" onclick="quickAdd('${artifactName}', 5)">+5</button>
+                    </div>
+                `;
+                artifactList.appendChild(artifactElement);
+            });
+        }
+
+        // Быстрое добавление
+        function quickAdd(artifactName, quantity) {
+            document.getElementById(`quantity-${artifactName}`).value = quantity;
+            addArtifact(artifactName);
+        }
+
+        // Добавление артефакта
+        function addArtifact(artifactName) {
+            const quantityInput = document.getElementById(`quantity-${artifactName}`);
+            const quantity = parseInt(quantityInput.value) || 1;
+            
+            if (quantity < 1) return;
+            
+            if (selectedArtifacts[artifactName]) {
+                selectedArtifacts[artifactName] += quantity;
+            } else {
+                selectedArtifacts[artifactName] = quantity;
+            }
+            
+            updateSelectedArtifactsDisplay();
+            updateCounters();
+            
+            // Сброс количества
+            quantityInput.value = 1;
+        }
+
+        // Удаление одного экземпляра артефакта
+        function removeArtifact(artifactName) {
+            if (selectedArtifacts[artifactName]) {
+                selectedArtifacts[artifactName]--;
+                if (selectedArtifacts[artifactName] <= 0) {
+                    delete selectedArtifacts[artifactName];
+                }
+                updateSelectedArtifactsDisplay();
+                updateCounters();
+            }
+        }
+
+        // Удаление всех экземпляров артефакта
+        function removeAllArtifacts(artifactName) {
+            delete selectedArtifacts[artifactName];
+            updateSelectedArtifactsDisplay();
+            updateCounters();
+        }
+
+        // Обновление отображения выбранных артефактов
+        function updateSelectedArtifactsDisplay() {
+            const container = document.getElementById('selectedArtifacts');
+            
+            if (Object.keys(selectedArtifacts).length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">Выберите артефакты из списка слева</div>';
+            } else {
+                container.innerHTML = Object.entries(selectedArtifacts).map(([artifactName, quantity]) => `
+                    <div class="selected-item">
+                        <span>${artifactsDB[artifactName]?.icon || '⚡'} ${artifactName}</span>
+                        <div class="item-count">${quantity}</div>
+                        <div class="count-controls">
+                            <button class="count-btn" onclick="removeArtifact('${artifactName}')" title="Удалить один">-</button>
+                            <button class="count-btn" onclick="addArtifact('${artifactName}')" title="Добавить один">+</button>
+                            <button class="count-btn" onclick="removeAllArtifacts('${artifactName}')" title="Удалить все">×</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Сохранение сборки
+        function saveBuild() {
+            const buildName = document.getElementById('buildName').value.trim();
+            if (!buildName) {
+                alert('Введите название сборки!');
+                return;
+            }
+
+            if (Object.keys(selectedArtifacts).length === 0) {
+                alert('Выберите артефакты для сохранения!');
+                return;
+            }
+
+            const build = {
+                id: Date.now(),
+                name: buildName,
+                artifacts: {...selectedArtifacts},
+                timestamp: new Date().toLocaleString('ru-RU')
+            };
+
+            savedBuilds.push(build);
+            localStorage.setItem('savedBuilds', JSON.stringify(savedBuilds));
+            updateSavedBuildsList();
+            
+            document.getElementById('buildName').value = '';
+            alert(`Сборка "${buildName}" сохранена!`);
+        }
+
+        // Загрузка сборки
+        function loadBuild(buildId) {
+            const build = savedBuilds.find(b => b.id === buildId);
+            if (build) {
+                selectedArtifacts = {...build.artifacts};
+                updateSelectedArtifactsDisplay();
+                updateCounters();
+                currentBuildName = build.name;
+            }
+        }
+
+        // Удаление сборки
+        function deleteBuild(buildId) {
+            if (confirm('Удалить эту сборку?')) {
+                savedBuilds = savedBuilds.filter(b => b.id !== buildId);
+                localStorage.setItem('savedBuilds', JSON.stringify(savedBuilds));
+                updateSavedBuildsList();
+                
+                // Удаляем из сравнения если была там
+                comparedBuilds = comparedBuilds.filter(id => id !== buildId);
+            }
+        }
+
+        // Обновление списка сохраненных сборок
+        function updateSavedBuildsList() {
+            const container = document.getElementById('savedBuilds');
+            
+            if (savedBuilds.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 10px;">Нет сохраненных сборок</div>';
+            } else {
+                container.innerHTML = savedBuilds.map(build => `
+                    <div class="saved-build-item">
+                        <div>
+                            <strong>${build.name}</strong><br>
+                            <small style="color: #888;">${build.timestamp}</small>
+                        </div>
+                        <div class="build-actions">
+                            <button class="action-btn" onclick="loadBuild(${build.id})" title="Загрузить">📥</button>
+                            <button class="action-btn" onclick="deleteBuild(${build.id})" title="Удалить">🗑️</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Показать сравнение
+        function showComparison() {
+            if (savedBuilds.length < 2) {
+                alert('Нужно сохранить хотя бы 2 сборки для сравнения!');
+                return;
+            }
+
+            document.getElementById('statsPanel').style.display = 'none';
+            document.getElementById('comparisonPanel').style.display = 'block';
+            updateComparisonControls();
+            displayComparison();
+        }
+
+        // Скрыть сравнение
+        function hideComparison() {
+            document.getElementById('comparisonPanel').style.display = 'none';
+            document.getElementById('statsPanel').style.display = 'block';
+        }
+
+        // Обновление элементов управления сравнением
+        function updateComparisonControls() {
+            const controlsContainer = document.getElementById('comparisonControls');
+            
+            if (savedBuilds.length === 0) {
+                controlsContainer.innerHTML = '<div style="color: #666;">Нет сохраненных сборок</div>';
+                return;
+            }
+
+            let controlsHTML = '<div style="color: #888; margin-right: 15px;">Выберите сборки для сравнения:</div>';
+            
+            savedBuilds.forEach((build, index) => {
+                const isChecked = comparedBuilds.includes(build.id);
+                const colorClass = buildColors[index % buildColors.length];
+                controlsHTML += `
+                    <label class="build-checkbox ${isChecked ? 'checked' : ''} ${colorClass}">
+                        <input type="checkbox" 
+                               value="${build.id}" 
+                               ${isChecked ? 'checked' : ''} 
+                               onchange="toggleBuildComparison(${build.id})">
+                        ${build.name}
+                    </label>
+                `;
+            });
+
+            controlsContainer.innerHTML = controlsHTML;
+        }
+
+        // Включение/выключение сборки в сравнении
+        function toggleBuildComparison(buildId) {
+            const index = comparedBuilds.indexOf(buildId);
+            if (index === -1) {
+                // Добавляем, если не превышен лимит
+                if (comparedBuilds.length < 5) {
+                    comparedBuilds.push(buildId);
+                } else {
+                    alert('Можно сравнивать не более 5 сборок одновременно!');
+                    // Снимаем галочку
+                    const checkbox = document.querySelector(`input[value="${buildId}"]`);
+                    if (checkbox) checkbox.checked = false;
+                    return;
+                }
+            } else {
+                // Удаляем
+                comparedBuilds.splice(index, 1);
+            }
+            
+            updateComparisonControls();
+            displayComparison();
+        }
+
+        // Отображение сравнения
+        function displayComparison() {
+            const comparisonGrid = document.getElementById('comparisonGrid');
+            
+            if (comparedBuilds.length === 0) {
+                comparisonGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #666; padding: 40px;">Выберите сборки для сравнения</div>';
+                return;
+            }
+
+            // Получаем выбранные сборки
+            const selectedBuilds = savedBuilds.filter(build => comparedBuilds.includes(build.id));
+            
+            let comparisonHTML = '';
+
+            // Заголовки для каждой сборки
+            selectedBuilds.forEach((build, index) => {
+                const colorClass = buildColors[index % buildColors.length];
+                const stats = calculateBuildStats(build.artifacts);
+                const totalArtifacts = Object.values(build.artifacts).reduce((a, b) => a + b, 0);
+                const radOut = stats.totalStats.вывод_радиации || 0;
+                const radIn = stats.totalStats.накопление_радиации || 0;
+                const netRadiation = radOut - radIn;
+                
+                comparisonHTML += `
+                    <div class="comparison-col">
+                        <div class="comparison-header ${colorClass}">
+                            <strong>${build.name}</strong><br>
+                            <small>${totalArtifacts} артов</small>
+                            <div style="margin-top: 5px; font-size: 0.8em;">
+                                ☢️ Вывод: ${radOut} | Накоп: ${radIn} | Итог: ${netRadiation}
+                            </div>
+                        </div>
+                        <div class="comparison-stats">
+                            ${Object.entries(stats.totalStats).map(([effect, value]) => `
+                                <div class="stat-item">
+                                    <div class="stat-name">
+                                        ${effectIcons[effect] || '⚡'} ${formatEffectName(effect)}
+                                    </div>
+                                    <div class="stat-value ${getEffectClass(effect, value)}">
+                                        ${formatEffectValue(effect, value)}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            comparisonGrid.innerHTML = comparisonHTML;
+        }
+
+        // Расчет статистики для сборки
+        function calculateBuildStats(artifacts) {
+            const totalStats = {};
+            
+            Object.entries(artifacts).forEach(([artifactName, quantity]) => {
+                const artifact = artifactsDB[artifactName];
+                Object.entries(artifact).forEach(([effect, value]) => {
+                    if (effect === 'icon') return; // Пропускаем иконку
+                    totalStats[effect] = (totalStats[effect] || 0) + (value * quantity);
+                });
+            });
+
+            const positiveEffects = {};
+            const negativeEffects = {};
+            
+            Object.entries(totalStats).forEach(([effect, value]) => {
+                if (effect === "вывод_радиации") {
+                    positiveEffects[effect] = value;
+                } else if (effect === "накопление_радиации") {
+                    negativeEffects[effect] = value;
+                } else {
+                    if (value > 0) {
+                        positiveEffects[effect] = value;
+                    } else if (value < 0) {
+                        negativeEffects[effect] = value;
+                    }
+                }
+            });
+
+            return { totalStats, positiveEffects, negativeEffects };
+        }
+
+        // Отображение информации о радиации
+        function displayRadiationInfo(radOut, radIn, netRadiation) {
+            let radiationClass = 'radiation-display';
+            let totalClass = 'total-neutral';
+            let message = '';
+            
+            if (netRadiation > 50) {
+                radiationClass += ' radiation-good';
+                totalClass = 'total-good';
+                message = '✅ Отличная защита от радиации!';
+            } else if (netRadiation > 20) {
+                radiationClass += ' radiation-good';
+                totalClass = 'total-good';
+                message = '✅ Хорошая защита от радиации';
+            } else if (netRadiation > 0) {
+                radiationClass += ' radiation-warning';
+                totalClass = 'total-neutral';
+                message = '⚠️ Защита от радиации слабая';
+            } else if (netRadiation === 0) {
+                radiationClass += ' radiation-warning';
+                totalClass = 'total-neutral';
+                message = '⚠️ Баланс радиации нейтральный';
+            } else if (netRadiation > -20) {
+                radiationClass += ' radiation-warning';
+                totalClass = 'total-bad';
+                message = '⚠️ Внимание! Преобладает накопление';
+            } else {
+                radiationClass += ' radiation-bad';
+                totalClass = 'total-bad';
+                message = '☢️ ОПАСНО! Высокий уровень радиации!';
+            }
+
+            return `
+                <div class="${radiationClass}">
+                    <div class="radiation-info">
+                        <div class="radiation-item radiation-good">
+                            <div class="radiation-label">☢️ Вывод радиации</div>
+                            <div class="radiation-value">+${radOut}</div>
+                            <div class="radiation-label">(чем больше, тем лучше)</div>
+                        </div>
+                        <div class="radiation-item radiation-bad">
+                            <div class="radiation-label">☢️ Накопление радиации</div>
+                            <div class="radiation-value">+${radIn}</div>
+                            <div class="radiation-label">(чем меньше, тем лучше)</div>
+                        </div>
+                    </div>
+                    <div class="radiation-total">
+                        <div class="radiation-label">ЧИСТЫЙ ЭФФЕКТ РАДИАЦИИ</div>
+                        <div class="total-value ${totalClass}">${netRadiation > 0 ? '+' : ''}${netRadiation}</div>
+                        <div class="radiation-message">${message}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Поиск артефактов
+        document.getElementById('searchArtifacts').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('.artifact-item');
+            
+            items.forEach(item => {
+                const name = item.querySelector('.artifact-name').textContent.toLowerCase();
+                if (name.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Очистка выбора
+        function clearSelection() {
+            selectedArtifacts = {};
+            updateSelectedArtifactsDisplay();
+            updateCounters();
+            document.getElementById('statsPanel').style.display = 'none';
+            
+            // Сброс всех полей ввода
+            document.querySelectorAll('.quantity-input').forEach(input => {
+                input.value = 1;
+            });
+        }
+
+        // Расчет статистики
+        function calculateStats() {
+            if (Object.keys(selectedArtifacts).length === 0) {
+                alert('Выберите хотя бы один артефакт!');
+                return;
+            }
+
+            const { totalStats, positiveEffects, negativeEffects } = calculateBuildStats(selectedArtifacts);
+            displayStats(totalStats, positiveEffects, negativeEffects);
+        }
+
+        // Отображение статистики
+        function displayStats(totalStats, positiveEffects, negativeEffects) {
+            const statsPanel = document.getElementById('statsPanel');
+            statsPanel.style.display = 'block';
+
+            // Анализ радиации
+            const radOut = totalStats.вывод_радиации || 0;
+            const radIn = totalStats.накопление_радиации || 0;
+            const netRadiation = radOut - radIn;
+
+            // Отображаем информацию о радиации
+            document.getElementById('radiationInfo').innerHTML = displayRadiationInfo(radOut, radIn, netRadiation);
+
+            // Общая статистика
+            const totalArtifactsCount = Object.values(selectedArtifacts).reduce((sum, count) => sum + count, 0);
+            const uniqueArtifactsCount = Object.keys(selectedArtifacts).length;
+            
+            const totalStatsElement = document.getElementById('totalStats');
+            totalStatsElement.innerHTML = `
+                <div class="stat-card positive">
+                    <div>✅ Положительные эффекты</div>
+                    <div class="stat-value-large">${Object.keys(positiveEffects).length}</div>
+                </div>
+                <div class="stat-card negative">
+                    <div>❌ Отрицательные эффекты</div>
+                    <div class="stat-value-large">${Object.keys(negativeEffects).length}</div>
+                </div>
+                <div class="stat-card">
+                    <div>⚡ Всего артефактов</div>
+                    <div class="stat-value-large">${totalArtifactsCount}</div>
+                    <div style="font-size: 0.8em; color: #888;">${uniqueArtifactsCount} уникальных</div>
+                </div>
+            `;
+
+            // Детали эффектов
+            document.getElementById('positiveEffects').innerHTML = Object.entries(positiveEffects)
+                .map(([effect, value]) => {
+                    const displayName = formatEffectName(effect);
+                    return `
+                        <div class="stat-item">
+                            <div class="stat-name">
+                                ${effectIcons[effect] || '⚡'} ${displayName}
+                            </div>
+                            <div class="stat-value positive">+${value.toFixed(1)}</div>
+                        </div>
+                    `;
+                }).join('') || '<div style="color: #666; text-align: center; padding: 10px;">Нет положительных эффектов</div>';
+
+            document.getElementById('negativeEffects').innerHTML = Object.entries(negativeEffects)
+                .map(([effect, value]) => {
+                    const displayName = formatEffectName(effect);
+                    return `
+                        <div class="stat-item">
+                            <div class="stat-name">
+                                ${effectIcons[effect] || '⚡'} ${displayName}
+                            </div>
+                            <div class="stat-value negative">${value.toFixed(1)}</div>
+                        </div>
+                    `;
+                }).join('') || '<div style="color: #666; text-align: center; padding: 10px;">Нет отрицательных эффектов</div>';
+
+            // Прокрутка к результатам
+            statsPanel.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Форматирование названий эффектов
+        function formatEffectName(effect) {
+            const names = {
+                "вывод_радиации": "Вывод радиации",
+                "накопление_радиации": "Накопление радиации", 
+                "вода": "Вода",
+                "еда": "Еда",
+                "кровь": "Кровь",
+                "здоровье": "Здоровье",
+                "шок": "Шок",
+                "лечение_пореза": "Лечение порезов",
+                "шанс_пореза": "Шанс пореза"
+            };
+            return names[effect] || effect;
+        }
+
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            initArtifactList();
+            updateCounters();
+            updateSavedBuildsList();
+        });
+    </script>
+</body>
+</html>
