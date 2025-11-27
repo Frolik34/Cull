@@ -51,7 +51,7 @@
         }
 
         .title {
-            font-size: 2.5em;
+            font-size: 2.8em;
             color: #00ff88;
             text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
             margin-bottom: 10px;
@@ -60,7 +60,7 @@
 
         .subtitle {
             color: #666;
-            font-size: 1.1em;
+            font-size: 1.3em;
             margin-bottom: 20px;
         }
 
@@ -74,7 +74,7 @@
             border: 1px solid #4a76a8;
             border-radius: 4px;
             padding: 8px 12px;
-            font-size: 0.8em;
+            font-size: 0.9em;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -100,7 +100,7 @@
             background: #ffd700;
             color: #000;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 4px;
             cursor: pointer;
             font-family: 'Courier New', monospace;
@@ -110,7 +110,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.9em;
+            font-size: 1em;
         }
 
         .top-btn:hover {
@@ -151,8 +151,8 @@
             }
             
             .top-btn {
-                padding: 8px 16px;
-                font-size: 0.8em;
+                padding: 10px 20px;
+                font-size: 0.9em;
             }
         }
 
@@ -166,7 +166,7 @@
 
         .panel-title {
             color: #00ff88;
-            font-size: 1.3em;
+            font-size: 1.5em;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 1px solid #333;
@@ -177,57 +177,74 @@
 
         .artifact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            max-height: 400px;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            max-height: 500px;
             overflow-y: auto;
             padding: 10px;
             background: #0d0d0d;
             border-radius: 4px;
         }
 
-        .artifact-item {
+        .clothing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #0d0d0d;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .artifact-item, .clothing-item {
             background: #262626;
             border: 1px solid #404040;
-            border-radius: 4px;
-            padding: 10px;
+            border-radius: 6px;
+            padding: 15px;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
         }
 
-        .artifact-item:hover {
+        .artifact-item:hover, .clothing-item:hover {
             border-color: #00ff88;
             transform: translateY(-2px);
             box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
         }
 
-        .artifact-item.selected {
+        .artifact-item.selected, .clothing-item.selected {
             background: rgba(0, 255, 136, 0.1);
             border-color: #00ff88;
         }
 
-        .artifact-image {
+        .artifact-icon, .clothing-icon {
             width: 100%;
-            height: 120px;
-            object-fit: contain;
-            margin-bottom: 8px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
             border-radius: 4px;
             background: #1a1a1a;
             padding: 5px;
+            font-size: 2.5em;
         }
 
-        .artifact-name {
+        .artifact-name, .clothing-name {
             font-weight: bold;
             color: #fff;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 1.1em;
+            line-height: 1.3;
         }
 
-        .artifact-effects {
-            font-size: 0.75em;
+        .artifact-effects, .clothing-effects {
+            font-size: 0.85em;
             color: #888;
+            line-height: 1.4;
         }
 
         .positive {
@@ -239,9 +256,17 @@
         }
 
         .selected-artifacts {
+            min-height: 120px;
+            background: #0d0d0d;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .selected-clothing {
             min-height: 100px;
             background: #0d0d0d;
-            border-radius: 4px;
+            border-radius: 6px;
             padding: 15px;
             margin-bottom: 20px;
         }
@@ -252,9 +277,21 @@
             background: rgba(0, 255, 136, 0.2);
             border: 1px solid #00ff88;
             border-radius: 20px;
-            padding: 5px 15px;
+            padding: 8px 18px;
             margin: 5px;
-            font-size: 0.9em;
+            font-size: 1em;
+            gap: 10px;
+        }
+
+        .clothing-item-display {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(74, 118, 168, 0.2);
+            border: 1px solid #4a76a8;
+            border-radius: 20px;
+            padding: 8px 18px;
+            margin: 5px;
+            font-size: 1em;
             gap: 10px;
         }
 
@@ -262,12 +299,25 @@
             background: rgba(0, 255, 136, 0.8);
             color: #000;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8em;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .clothing-count {
+            background: rgba(74, 118, 168, 0.8);
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
             font-weight: bold;
         }
 
@@ -282,14 +332,14 @@
             background: rgba(255, 255, 255, 0.1);
             border: none;
             color: #fff;
-            width: 20px;
-            height: 20px;
+            width: 24px;
+            height: 24px;
             border-radius: 3px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8em;
+            font-size: 0.9em;
         }
 
         .count-btn:hover {
@@ -323,12 +373,13 @@
             display: flex;
             align-items: center;
             gap: 5px;
-            padding: 8px 12px;
+            padding: 10px 15px;
             background: #262626;
             border-radius: 4px;
             border: 1px solid #333;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1em;
         }
 
         .build-checkbox:hover {
@@ -346,8 +397,8 @@
 
         .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
             margin-top: 20px;
         }
 
@@ -364,6 +415,7 @@
             background: #262626;
             border: 2px solid #333;
             position: relative;
+            font-size: 1.1em;
         }
 
         .comparison-header.inactive {
@@ -376,6 +428,7 @@
             border-radius: 6px;
             padding: 15px;
             min-height: 200px;
+            font-size: 1em;
         }
 
         .comparison-stats.inactive {
@@ -386,8 +439,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 0;
+            padding: 10px 0;
             border-bottom: 1px solid #262626;
+            font-size: 1em;
         }
 
         .stat-name {
@@ -398,6 +452,7 @@
 
         .stat-value {
             font-weight: bold;
+            font-size: 1em;
         }
 
         .better {
@@ -447,7 +502,7 @@
         }
 
         .radiation-value {
-            font-size: 1.8em;
+            font-size: 2em;
             font-weight: bold;
             margin: 5px 0;
         }
@@ -461,7 +516,7 @@
         }
 
         .radiation-label {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #888;
         }
 
@@ -473,7 +528,7 @@
         }
 
         .total-value {
-            font-size: 2em;
+            font-size: 2.2em;
             font-weight: bold;
             margin: 10px 0;
         }
@@ -491,7 +546,7 @@
         }
 
         .radiation-message {
-            font-size: 1.1em;
+            font-size: 1.2em;
             font-weight: bold;
             margin-top: 10px;
         }
@@ -500,13 +555,14 @@
             background: #00ff88;
             color: #000;
             border: none;
-            padding: 12px 24px;
+            padding: 14px 28px;
             border-radius: 4px;
             cursor: pointer;
             font-family: 'Courier New', monospace;
             font-weight: bold;
             transition: all 0.3s ease;
             margin: 5px;
+            font-size: 1em;
         }
 
         .btn:hover {
@@ -542,13 +598,13 @@
         }
 
         .icon {
-            font-size: 1.2em;
+            font-size: 1.3em;
         }
 
         .total-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
             margin-top: 20px;
         }
 
@@ -556,7 +612,7 @@
             background: #1a1a1a;
             border: 1px solid #333;
             border-radius: 6px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
         }
 
@@ -569,20 +625,21 @@
         }
 
         .stat-value-large {
-            font-size: 2em;
+            font-size: 2.2em;
             font-weight: bold;
             margin: 10px 0;
         }
 
         .search-box {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background: #0d0d0d;
             border: 1px solid #333;
             border-radius: 4px;
             color: #fff;
             margin-bottom: 15px;
             font-family: 'Courier New', monospace;
+            font-size: 1em;
         }
 
         .search-box:focus {
@@ -598,40 +655,60 @@
         }
 
         .quantity-input {
-            width: 60px;
-            padding: 5px;
+            width: 70px;
+            padding: 8px;
             background: #0d0d0d;
             border: 1px solid #333;
             border-radius: 4px;
             color: #fff;
             text-align: center;
+            font-size: 1em;
         }
 
         .add-btn {
             background: #00ff88;
             color: #000;
             border: none;
-            padding: 5px 10px;
+            padding: 8px 15px;
             border-radius: 4px;
             cursor: pointer;
             font-family: 'Courier New', monospace;
-            font-size: 0.8em;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .clothing-add-btn {
+            background: #4a76a8;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .clothing-add-btn:hover {
+            background: #5a86b8;
         }
 
         .quick-add {
             display: flex;
             gap: 5px;
-            margin-top: 5px;
+            margin-top: 8px;
         }
 
         .quick-btn {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid #404040;
             color: #fff;
-            padding: 2px 8px;
+            padding: 4px 10px;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 0.7em;
+            font-size: 0.8em;
         }
 
         .quick-btn:hover {
@@ -644,12 +721,14 @@
             padding: 20px;
             border-top: 1px solid #333;
             color: #666;
+            font-size: 1em;
         }
 
         .author-link {
             color: #00ff88;
             text-decoration: none;
             transition: color 0.3s ease;
+            font-size: 1em;
         }
 
         .author-link:hover {
@@ -662,6 +741,7 @@
             text-decoration: none;
             transition: color 0.3s ease;
             font-weight: bold;
+            font-size: 1em;
         }
 
         .donate-link:hover {
@@ -674,6 +754,7 @@
             text-decoration: none;
             transition: color 0.3s ease;
             font-weight: bold;
+            font-size: 1em;
         }
 
         .wrgm-link:hover {
@@ -691,36 +772,30 @@
 
         .footer-section {
             padding: 10px;
+            font-size: 1em;
         }
 
         /* Стили для скроллбара */
-        .artifact-grid::-webkit-scrollbar {
+        .artifact-grid::-webkit-scrollbar,
+        .clothing-grid::-webkit-scrollbar {
             width: 8px;
         }
 
-        .artifact-grid::-webkit-scrollbar-track {
+        .artifact-grid::-webkit-scrollbar-track,
+        .clothing-grid::-webkit-scrollbar-track {
             background: #0d0d0d;
             border-radius: 4px;
         }
 
-        .artifact-grid::-webkit-scrollbar-thumb {
+        .artifact-grid::-webkit-scrollbar-thumb,
+        .clothing-grid::-webkit-scrollbar-thumb {
             background: #00ff88;
             border-radius: 4px;
         }
 
-        .artifact-grid::-webkit-scrollbar-thumb:hover {
+        .artifact-grid::-webkit-scrollbar-thumb:hover,
+        .clothing-grid::-webkit-scrollbar-thumb:hover {
             background: #00cc6a;
-        }
-
-        /* Стиль для артефактов без изображений */
-        .no-image {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #1a1a1a;
-            color: #666;
-            font-size: 2em;
-            border: 1px dashed #404040;
         }
 
         /* Счетчик артефактов */
@@ -731,8 +806,8 @@
             background: #00ff88;
             color: #000;
             border-radius: 20px;
-            padding: 8px 15px;
-            font-size: 0.9em;
+            padding: 10px 18px;
+            font-size: 1em;
             font-weight: bold;
             z-index: 100;
             box-shadow: 0 2px 10px rgba(0, 255, 136, 0.3);
@@ -743,10 +818,11 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 12px;
             background: rgba(0, 255, 136, 0.1);
             border-radius: 6px;
             border: 1px solid #00ff88;
+            font-size: 1em;
         }
 
         .counter-item {
@@ -755,13 +831,13 @@
         }
 
         .counter-value {
-            font-size: 1.5em;
+            font-size: 1.6em;
             font-weight: bold;
             color: #00ff88;
         }
 
         .counter-label {
-            font-size: 0.8em;
+            font-size: 0.9em;
             color: #888;
         }
 
@@ -775,13 +851,14 @@
 
         .build-name-input {
             flex: 1;
-            padding: 8px;
+            padding: 10px;
             background: #0d0d0d;
             border: 1px solid #333;
             border-radius: 4px;
             color: #fff;
             font-family: 'Courier New', monospace;
             min-width: 150px;
+            font-size: 1em;
         }
 
         .saved-builds {
@@ -792,13 +869,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px;
+            padding: 12px;
             background: #262626;
             border: 1px solid #333;
             border-radius: 4px;
             margin-bottom: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1em;
         }
 
         .saved-build-item:hover {
@@ -815,10 +893,10 @@
             background: rgba(255, 255, 255, 0.1);
             border: none;
             color: #fff;
-            padding: 4px 8px;
-            border-radius: 3px;
+            padding: 6px 10px;
+            borderRadius: 3px;
             cursor: pointer;
-            font-size: 0.7em;
+            font-size: 0.8em;
         }
 
         .action-btn:hover {
@@ -831,6 +909,43 @@
         .build-color-3 { border-color: #ff6b6b; }
         .build-color-4 { border-color: #4a76a8; }
         .build-color-5 { border-color: #9b59b6; }
+
+        /* Вкладки */
+        .tabs {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .tab.active {
+            background: #1a1a1a;
+            border-color: #333;
+            border-bottom-color: #1a1a1a;
+            color: #00ff88;
+        }
+
+        .tab:hover:not(.active) {
+            background: #262626;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -864,31 +979,53 @@
             <div class="panel">
                 <div class="panel-title">
                     <span class="icon">⚡</span>
-                    ДОСТУПНЫЕ АРТЕФАКТЫ
+                    ЭКИПИРОВКА
                 </div>
                 
-                <input type="text" class="search-box" placeholder="Поиск артефактов..." id="searchArtifacts">
+                <!-- Вкладки для переключения между артефактами и одеждой -->
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('artifacts')">АРТЕФАКТЫ</div>
+                    <div class="tab" onclick="switchTab('clothing')">ОДЕЖДА</div>
+                </div>
                 
-                <div class="artifact-grid" id="artifactList">
-                    <!-- Артефакты будут загружены через JavaScript -->
+                <!-- Вкладка артефактов -->
+                <div class="tab-content active" id="artifacts-tab">
+                    <input type="text" class="search-box" placeholder="Поиск артефактов..." id="searchArtifacts">
+                    
+                    <div class="artifact-grid" id="artifactList">
+                        <!-- Артефакты будут загружены через JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Вкладка одежды -->
+                <div class="tab-content" id="clothing-tab">
+                    <input type="text" class="search-box" placeholder="Поиск одежды..." id="searchClothing">
+                    
+                    <div class="clothing-grid" id="clothingList">
+                        <!-- Одежда будет загружена через JavaScript -->
+                    </div>
                 </div>
             </div>
 
             <div class="panel">
                 <div class="panel-title">
                     <span class="icon">🎒</span>
-                    ВАШ РЕМЕНЬ
+                    ВАШ РЕМЕНЬ И ЭКИПИРОВКА
                 </div>
                 
                 <!-- Счетчики в ремне -->
                 <div class="belt-counter" id="beltCounter" style="display: none;">
                     <div class="counter-item">
                         <div class="counter-value" id="uniqueCount">0</div>
-                        <div class="counter-label">уникальных</div>
+                        <div class="counter-label">уникальных артов</div>
                     </div>
                     <div class="counter-item">
                         <div class="counter-value" id="totalBeltCount">0</div>
                         <div class="counter-label">всего артов</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value" id="clothingCount">0</div>
+                        <div class="counter-label">предметов одежды</div>
                     </div>
                 </div>
                 
@@ -903,9 +1040,24 @@
                     </button>
                 </div>
 
+                <!-- Выбранная одежда -->
+                <div class="panel-title" style="font-size: 1.2em; margin-top: 10px;">
+                    <span class="icon">👕</span>
+                    ВАША ОДЕЖДА
+                </div>
+                <div class="selected-clothing" id="selectedClothing">
+                    <div style="text-align: center; color: #666; padding: 10px;">
+                        Выберите одежду из списка слева
+                    </div>
+                </div>
+
+                <!-- Выбранные артефакты -->
+                <div class="panel-title" style="font-size: 1.2em; margin-top: 10px;">
+                    <span class="icon">⚡</span>
+                    ВАШИ АРТЕФАКТЫ
+                </div>
                 <div class="selected-artifacts" id="selectedArtifacts">
-                    <!-- Выбранные артефакты появятся здесь -->
-                    <div style="text-align: center; color: #666; padding: 20px;">
+                    <div style="text-align: center; color: #666; padding: 10px;">
                         Выберите артефакты из списка слева
                     </div>
                 </div>
@@ -977,7 +1129,7 @@
         </div>
 
         <div class="footer">
-            <p>Создано сталкером для сталкеров</p>
+            <p>Создано сталкером FROLIK для сталкеров</p>
             <div class="footer-links">
                 <div class="footer-section">
                     <strong>Автор:</strong><br>
@@ -1059,10 +1211,89 @@
             "Пленка": {"лечение_пореза": 20, "еда": 20, "кровь": -50, "вода": -20, "накопление_радиации": 10, icon: "🎞️"}
         };
 
+        // База данных одежды с иконками
+        const clothingDB = {
+            "Капюшон ПСЗ": {"защита_радиации": 25, "защита_удара": 85, icon: "🎩"},
+            "Куртка ПСЗ": {"защита_радиации": 25, "защита_удара": 85, "вместимость": 350, icon: "🧥"},
+            "Броник ПСЗ": {"защита_радиации": 25, "защита_удара": 85, "вместимость": 350, icon: "🦺"},
+            "Штаны ПСЗ": {"защита_радиации": 25, "защита_удара": 85, "вместимость": 350, icon: "👖"},
+            "Маска на лицо": {"защита_радиации": 0, "защита_удара": 85, "вместимость": 0, icon: "🎭"},
+            "Перчатки ПСЗ": {"защита_радиации": 25, "защита_удара": 85, "вместимость": 0, icon: "🧤"},
+            "Ботинки ПСЗ": {"защита_радиации": 25, "защита_удара": 85, "вместимость": 0, icon: "👢"},
+            "Шлем Roxxon": {"защита_радиации": 0, "защита_удара": 85, "вместимость": 0, icon: "⛑️"},
+            "Торс Roxxon": {"защита_радиации": 30, "защита_удара": 85, "вместимость": 350, icon: "👔"},
+            "Штаны Roxxon": {"защита_радиации": 30, "защита_удара": 85, "вместимость": 350, icon: "👖"},
+            "Экзоскелет Roxxon": {"защита_радиации": 30, "защита_удара": 85, "вместимость": 350, icon: "🤖"},
+            "Перчатки Roxxon": {"защита_радиации": 30, "защита_удара": 85, "вместимость": 0, icon: "🧤"},
+            "Ботинки Roxxon": {"защита_радиации": 30, "защита_удара": 85, "вместимость": 0, icon: "👢"},
+            "Шлем Лаки": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 0, icon: "⛑️"},
+            "Куртка Лаки": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 500, icon: "🧥"},
+            "Броник Лаки": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 500, icon: "🦺"},
+            "Штаны Лаки": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 500, icon: "👖"},
+            "Перчатки Лаки": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 500, icon: "🧤"},
+            "Маскировка Лаки": {"защита_радиации": 0, "защита_удара": 90, "вместимость": 0, icon: "🎭"},
+            "Ботинки Лаки": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 0, icon: "👢"},
+            "Маска Лаки": {"защита_радиации": 0, "защита_удара": 90, "вместимость": 0, icon: "🎭"},
+            "Наушники Вышибала": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 0, icon: "🎧"},
+            "Куртка Вышибала": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 500, icon: "🧥"},
+            "Штаны Вышибала": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 500, icon: "👖"},
+            "Броник Вышибала": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 500, icon: "🦺"},
+            "Перчатки Вышибала": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 0, icon: "🧤"},
+            "Ботинки Вышибала": {"защита_радиации": 50, "защита_удара": 90, "вместимость": 0, icon: "👢"},
+            "Наплечник Вышибала": {"защита_радиации": 0, "защита_удара": 90, "вместимость": 0, icon: "🦾"},
+            "Маска Вышибала": {"защита_радиации": 0, "защита_удара": 90, "вместимость": 0, icon: "🎭"},
+            "Куртка Браскин": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 700, icon: "🧥"},
+            "Броник Браскин": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 700, icon: "🦺"},
+            "Штаны Браскин": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 700, icon: "👖"},
+            "Шлем Браскин": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 0, icon: "⛑️"},
+            "Перчатки Браскин": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 0, icon: "🧤"},
+            "Ботинки Браскин": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 0, icon: "👢"},
+            "Маска Браскин": {"защита_радиации": 0, "защита_удара": 95, "вместимость": 0, icon: "🎭"},
+            "Маскировка Браскин": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 700, icon: "🎭"},
+            "Куртка Дюна": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 700, icon: "🧥"},
+            "Броник Дюна": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 700, icon: "🦺"},
+            "Штаны Дюна": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 700, icon: "👖"},
+            "Шлем Дюна": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 0, icon: "⛑️"},
+            "Перчатки Дюна": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 0, icon: "🧤"},
+            "Ботинки Дюна": {"защита_радиации": 50, "защита_удара": 95, "вместимость": 0, icon: "👢"},
+            "Маска Дюна": {"защита_радиации": 0, "защита_удара": 95, "вместимость": 0, icon: "🎭"},
+            "Балахон Дюна": {"защита_радиации": 0, "защита_удара": 95, "вместимость": 0, icon: "👘"},
+            "Капюшон Тайга": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 0, icon: "🎩"},
+            "Ботинки Тайга": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 0, icon: "👢"},
+            "Перчатки Тайга": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 0, icon: "🧤"},
+            "Броник Тайга": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 250, icon: "🦺"},
+            "Штаны Тайга": {"защита_радиации": 30, "защита_удара": 60, "вместимость": 250, icon: "👖"},
+            "Куртка Тайга": {"защита_радиации": 30, "защита_удара": 60, "вместимость": 250, icon: "🧥"},
+            "Рюкзак Тайга": {"защита_радиации": 0, "защита_удара": 0, "вместимость": 500, icon: "🎒"},
+            "Перчатки Red Death": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 0, icon: "🧤"},
+            "Ботинки Red Death": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 0, icon: "👢"},
+            "Рюкзак Red Death": {"защита_радиации": 0, "защита_удара": 0, "вместимость": 500, icon: "🎒"},
+            "Куртка Red Death": {"защита_радиации": 40, "защита_удара": 60, "вместимость": 250, icon: "🧥"},
+            "Броник Red Death": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 250, icon: "🦺"},
+            "Штаны Red Death": {"защита_радиации": 30, "защита_удара": 60, "вместимость": 250, icon: "👖"},
+            "Капюшон Biohazard": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 0, icon: "🎩"},
+            "Перчатки Biohazard": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 0, icon: "🧤"},
+            "Ботинки Biohazard": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 0, icon: "👢"},
+            "Куртка Biohazard": {"защита_радиации": 30, "защита_удара": 60, "вместимость": 250, icon: "🧥"},
+            "Броник Biohazard": {"защита_радиации": 10, "защита_удара": 60, "вместимость": 250, icon: "🦺"},
+            "Штаны Biohazard": {"защита_радиации": 30, "защита_удара": 60, "вместимость": 250, icon: "👖"},
+            "Рюкзак Biohazard": {"защита_радиации": 0, "защита_удара": 0, "вместимость": 500, icon: "🎒"},
+            "Шлем ЭОО": {"защита_радиации": 5, "защита_удара": 35, "вместимость": 0, icon: "⛑️"},
+            "Перчатки ЭОО": {"защита_радиации": 5, "защита_удара": 35, "вместимость": 0, icon: "🧤"},
+            "Ботинки ЭОО": {"защита_радиации": 15, "защита_удара": 35, "вместимость": 0, icon: "👢"},
+            "Куртка ЭОО": {"защита_радиации": 15, "защита_удара": 35, "вместимость": 200, icon: "🧥"},
+            "Броник ЭОО": {"защита_радиации": 10, "защита_удара": 35, "вместимость": 100, icon: "🦺"},
+            "Штаны ЭОО": {"защита_радиации": 10, "защита_удара": 35, "вместимость": 200, icon: "👖"},
+            "Рюкзак ЭОО": {"защита_радиации": 0, "защита_удара": 0, "вместимость": 200, icon: "🎒"}
+        };
+
         // Иконки для эффектов
         const effectIcons = {
             "вывод_радиации": "☢️",
             "накопление_радиации": "☢️",
+            "защита_радиации": "🛡️",
+            "защита_удара": "🥊",
+            "вместимость": "🎒",
             "вода": "💧",
             "еда": "🍖",
             "кровь": "🩸",
@@ -1076,22 +1307,24 @@
         const buildColors = ['build-color-1', 'build-color-2', 'build-color-3', 'build-color-4', 'build-color-5'];
 
         let selectedArtifacts = {};
+        let selectedClothing = {};
         let savedBuilds = JSON.parse(localStorage.getItem('savedBuilds')) || [];
         let currentBuildName = '';
         let comparedBuilds = []; // Массив ID сборок для сравнения
 
         // Функция для обновления счетчиков
         function updateCounters() {
-            const totalCount = Object.values(selectedArtifacts).reduce((sum, count) => sum + count, 0);
-            const uniqueCount = Object.keys(selectedArtifacts).length;
+            const totalArtifactCount = Object.values(selectedArtifacts).reduce((sum, count) => sum + count, 0);
+            const uniqueArtifactCount = Object.keys(selectedArtifacts).length;
+            const clothingCount = Object.keys(selectedClothing).length;
 
             // Обновляем счетчик в левом верхнем углу
             const artifactCounter = document.getElementById('artifactCounter');
             const totalCountElement = document.getElementById('totalCount');
             
-            if (totalCount > 0) {
+            if (totalArtifactCount > 0) {
                 artifactCounter.style.display = 'block';
-                totalCountElement.textContent = totalCount;
+                totalCountElement.textContent = totalArtifactCount;
             } else {
                 artifactCounter.style.display = 'none';
             }
@@ -1100,11 +1333,13 @@
             const beltCounter = document.getElementById('beltCounter');
             const uniqueCountElement = document.getElementById('uniqueCount');
             const totalBeltCountElement = document.getElementById('totalBeltCount');
+            const clothingCountElement = document.getElementById('clothingCount');
             
-            if (totalCount > 0) {
+            if (totalArtifactCount > 0 || clothingCount > 0) {
                 beltCounter.style.display = 'flex';
-                uniqueCountElement.textContent = uniqueCount;
-                totalBeltCountElement.textContent = totalCount;
+                uniqueCountElement.textContent = uniqueArtifactCount;
+                totalBeltCountElement.textContent = totalArtifactCount;
+                clothingCountElement.textContent = clothingCount;
             } else {
                 beltCounter.style.display = 'none';
             }
@@ -1112,7 +1347,7 @@
 
         // Функция для определения цвета эффекта
         function getEffectClass(effect, value) {
-            if (effect === "вывод_радиации") {
+            if (effect === "вывод_радиации" || effect === "защита_радиации" || effect === "защита_удара" || effect === "вместимость") {
                 return value > 0 ? "positive" : "negative";
             } else if (effect === "накопление_радиации") {
                 return value > 0 ? "negative" : "positive";
@@ -1128,6 +1363,17 @@
             } else {
                 return `${value}`;
             }
+        }
+
+        // Переключение вкладок
+        function switchTab(tabName) {
+            // Убираем активный класс со всех вкладок и контента
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Активируем выбранную вкладку и контент
+            document.querySelector(`.tab:nth-child(${tabName === 'artifacts' ? 1 : 2})`).classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
         }
 
         // Инициализация списка артефактов
@@ -1147,13 +1393,13 @@
                     const formattedValue = formatEffectValue(effect, value);
                     effectsHTML += `
                         <div class="${effectClass}">
-                            ${effectIcons[effect] || '⚡'} ${formatEffectName(effect)}: ${formattedValue}
+                            ${formatEffectName(effect)}: ${formattedValue}
                         </div>
                     `;
                 });
 
                 artifactElement.innerHTML = `
-                    <div class="artifact-image no-image">${artifact.icon || '⚡'}</div>
+                    <div class="artifact-icon">${artifact.icon || '⚡'}</div>
                     <div class="artifact-name">${artifactName}</div>
                     <div class="artifact-effects">
                         ${effectsHTML}
@@ -1170,11 +1416,49 @@
                         <button class="quick-btn" onclick="quickAdd('${artifactName}', 5)">+5</button>
                     </div>
                 `;
+                
                 artifactList.appendChild(artifactElement);
             });
         }
 
-        // Быстрое добавление
+        // Инициализация списка одежды
+        function initClothingList() {
+            const clothingList = document.getElementById('clothingList');
+            clothingList.innerHTML = '';
+
+            Object.keys(clothingDB).forEach(clothingName => {
+                const clothing = clothingDB[clothingName];
+                const clothingElement = document.createElement('div');
+                clothingElement.className = 'clothing-item';
+                
+                let effectsHTML = '';
+                Object.entries(clothing).forEach(([effect, value]) => {
+                    if (effect === 'icon') return; // Пропускаем иконку
+                    const effectClass = getEffectClass(effect, value);
+                    const formattedValue = formatEffectValue(effect, value);
+                    effectsHTML += `
+                        <div class="${effectClass}">
+                            ${formatEffectName(effect)}: ${formattedValue}
+                        </div>
+                    `;
+                });
+
+                clothingElement.innerHTML = `
+                    <div class="clothing-icon">${clothing.icon || '👕'}</div>
+                    <div class="clothing-name">${clothingName}</div>
+                    <div class="clothing-effects">
+                        ${effectsHTML}
+                    </div>
+                    <button class="clothing-add-btn" onclick="addClothing('${clothingName}')">
+                        Экипировать
+                    </button>
+                `;
+                
+                clothingList.appendChild(clothingElement);
+            });
+        }
+
+        // Быстрое добавление артефактов
         function quickAdd(artifactName, quantity) {
             document.getElementById(`quantity-${artifactName}`).value = quantity;
             addArtifact(artifactName);
@@ -1200,6 +1484,14 @@
             quantityInput.value = 1;
         }
 
+        // Добавление одежды
+        function addClothing(clothingName) {
+            // Одежда может быть только в одном экземпляре
+            selectedClothing[clothingName] = 1;
+            updateSelectedClothingDisplay();
+            updateCounters();
+        }
+
         // Удаление одного экземпляра артефакта
         function removeArtifact(artifactName) {
             if (selectedArtifacts[artifactName]) {
@@ -1210,6 +1502,13 @@
                 updateSelectedArtifactsDisplay();
                 updateCounters();
             }
+        }
+
+        // Удаление одежды
+        function removeClothing(clothingName) {
+            delete selectedClothing[clothingName];
+            updateSelectedClothingDisplay();
+            updateCounters();
         }
 
         // Удаление всех экземпляров артефакта
@@ -1224,16 +1523,35 @@
             const container = document.getElementById('selectedArtifacts');
             
             if (Object.keys(selectedArtifacts).length === 0) {
-                container.innerHTML = '<div style="text-align: center; color: #666; padding: 20px;">Выберите артефакты из списка слева</div>';
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 10px;">Выберите артефакты из списка слева</div>';
             } else {
                 container.innerHTML = Object.entries(selectedArtifacts).map(([artifactName, quantity]) => `
                     <div class="selected-item">
-                        <span>${artifactsDB[artifactName]?.icon || '⚡'} ${artifactName}</span>
+                        <span>${artifactName}</span>
                         <div class="item-count">${quantity}</div>
                         <div class="count-controls">
                             <button class="count-btn" onclick="removeArtifact('${artifactName}')" title="Удалить один">-</button>
                             <button class="count-btn" onclick="addArtifact('${artifactName}')" title="Добавить один">+</button>
                             <button class="count-btn" onclick="removeAllArtifacts('${artifactName}')" title="Удалить все">×</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Обновление отображения выбранной одежды
+        function updateSelectedClothingDisplay() {
+            const container = document.getElementById('selectedClothing');
+            
+            if (Object.keys(selectedClothing).length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #666; padding: 10px;">Выберите одежду из списка слева</div>';
+            } else {
+                container.innerHTML = Object.keys(selectedClothing).map(clothingName => `
+                    <div class="clothing-item-display">
+                        <span>${clothingName}</span>
+                        <div class="clothing-count">1</div>
+                        <div class="count-controls">
+                            <button class="count-btn" onclick="removeClothing('${clothingName}')" title="Снять">×</button>
                         </div>
                     </div>
                 `).join('');
@@ -1248,8 +1566,8 @@
                 return;
             }
 
-            if (Object.keys(selectedArtifacts).length === 0) {
-                alert('Выберите артефакты для сохранения!');
+            if (Object.keys(selectedArtifacts).length === 0 && Object.keys(selectedClothing).length === 0) {
+                alert('Выберите артефакты или одежду для сохранения!');
                 return;
             }
 
@@ -1257,6 +1575,7 @@
                 id: Date.now(),
                 name: buildName,
                 artifacts: {...selectedArtifacts},
+                clothing: {...selectedClothing},
                 timestamp: new Date().toLocaleString('ru-RU')
             };
 
@@ -1273,7 +1592,9 @@
             const build = savedBuilds.find(b => b.id === buildId);
             if (build) {
                 selectedArtifacts = {...build.artifacts};
+                selectedClothing = {...build.clothing};
                 updateSelectedArtifactsDisplay();
+                updateSelectedClothingDisplay();
                 updateCounters();
                 currentBuildName = build.name;
             }
@@ -1400,26 +1721,28 @@
             // Заголовки для каждой сборки
             selectedBuilds.forEach((build, index) => {
                 const colorClass = buildColors[index % buildColors.length];
-                const stats = calculateBuildStats(build.artifacts);
+                const stats = calculateBuildStats(build.artifacts, build.clothing);
                 const totalArtifacts = Object.values(build.artifacts).reduce((a, b) => a + b, 0);
+                const totalClothing = Object.keys(build.clothing).length;
                 const radOut = stats.totalStats.вывод_радиации || 0;
                 const radIn = stats.totalStats.накопление_радиации || 0;
-                const netRadiation = radOut - radIn;
+                const radProtection = stats.totalStats.защита_радиации || 0;
+                const netRadiation = radOut - radIn + radProtection;
                 
                 comparisonHTML += `
                     <div class="comparison-col">
                         <div class="comparison-header ${colorClass}">
                             <strong>${build.name}</strong><br>
-                            <small>${totalArtifacts} артов</small>
-                            <div style="margin-top: 5px; font-size: 0.8em;">
-                                ☢️ Вывод: ${radOut} | Накоп: ${radIn} | Итог: ${netRadiation}
+                            <small>${totalArtifacts} артов, ${totalClothing} одежды</small>
+                            <div style="margin-top: 5px; font-size: 0.9em;">
+                                Вывод: ${radOut} | Накоп: ${radIn} | Защ: ${radProtection} | Итог: ${netRadiation}
                             </div>
                         </div>
                         <div class="comparison-stats">
                             ${Object.entries(stats.totalStats).map(([effect, value]) => `
                                 <div class="stat-item">
                                     <div class="stat-name">
-                                        ${effectIcons[effect] || '⚡'} ${formatEffectName(effect)}
+                                        ${formatEffectName(effect)}
                                     </div>
                                     <div class="stat-value ${getEffectClass(effect, value)}">
                                         ${formatEffectValue(effect, value)}
@@ -1434,10 +1757,11 @@
             comparisonGrid.innerHTML = comparisonHTML;
         }
 
-        // Расчет статистики для сборки
-        function calculateBuildStats(artifacts) {
+        // Расчет статистики для сборки (артефакты + одежда)
+        function calculateBuildStats(artifacts, clothing) {
             const totalStats = {};
             
+            // Считаем артефакты
             Object.entries(artifacts).forEach(([artifactName, quantity]) => {
                 const artifact = artifactsDB[artifactName];
                 Object.entries(artifact).forEach(([effect, value]) => {
@@ -1446,11 +1770,35 @@
                 });
             });
 
+            // Считаем одежду - ОСОБАЯ ЛОГИКА ДЛЯ ЗАЩИТЫ ОТ УДАРА
+            let maxStrikeProtection = 0;
+            Object.keys(clothing).forEach(clothingName => {
+                const clothingItem = clothingDB[clothingName];
+                Object.entries(clothingItem).forEach(([effect, value]) => {
+                    if (effect === 'icon') return; // Пропускаем иконку
+                    
+                    if (effect === "защита_удара") {
+                        // Для защиты от удара берем максимальное значение
+                        if (value > maxStrikeProtection) {
+                            maxStrikeProtection = value;
+                        }
+                    } else {
+                        // Для остальных эффектов суммируем как обычно
+                        totalStats[effect] = (totalStats[effect] || 0) + value;
+                    }
+                });
+            });
+            
+            // Устанавливаем максимальное значение защиты от удара
+            if (maxStrikeProtection > 0) {
+                totalStats["защита_удара"] = maxStrikeProtection;
+            }
+
             const positiveEffects = {};
             const negativeEffects = {};
             
             Object.entries(totalStats).forEach(([effect, value]) => {
-                if (effect === "вывод_радиации") {
+                if (effect === "вывод_радиации" || effect === "защита_радиации" || effect === "защита_удара" || effect === "вместимость") {
                     positiveEffects[effect] = value;
                 } else if (effect === "накопление_радиации") {
                     negativeEffects[effect] = value;
@@ -1466,29 +1814,31 @@
             return { totalStats, positiveEffects, negativeEffects };
         }
 
-        // Отображение информации о радиации
-        function displayRadiationInfo(radOut, radIn, netRadiation) {
+        // Отображение информации о радиации (с учетом защиты от одежды)
+        function displayRadiationInfo(radOut, radIn, radProtection, netRadiation) {
             let radiationClass = 'radiation-display';
             let totalClass = 'total-neutral';
             let message = '';
             
-            if (netRadiation > 50) {
+            const totalRadEffect = netRadiation;
+            
+            if (totalRadEffect > 50) {
                 radiationClass += ' radiation-good';
                 totalClass = 'total-good';
                 message = '✅ Отличная защита от радиации!';
-            } else if (netRadiation > 20) {
+            } else if (totalRadEffect > 20) {
                 radiationClass += ' radiation-good';
                 totalClass = 'total-good';
                 message = '✅ Хорошая защита от радиации';
-            } else if (netRadiation > 0) {
+            } else if (totalRadEffect > 0) {
                 radiationClass += ' radiation-warning';
                 totalClass = 'total-neutral';
                 message = '⚠️ Защита от радиации слабая';
-            } else if (netRadiation === 0) {
+            } else if (totalRadEffect === 0) {
                 radiationClass += ' radiation-warning';
                 totalClass = 'total-neutral';
                 message = '⚠️ Баланс радиации нейтральный';
-            } else if (netRadiation > -20) {
+            } else if (totalRadEffect > -20) {
                 radiationClass += ' radiation-warning';
                 totalClass = 'total-bad';
                 message = '⚠️ Внимание! Преобладает накопление';
@@ -1502,14 +1852,20 @@
                 <div class="${radiationClass}">
                     <div class="radiation-info">
                         <div class="radiation-item radiation-good">
-                            <div class="radiation-label">☢️ Вывод радиации</div>
+                            <div class="radiation-label">Вывод радиации</div>
                             <div class="radiation-value">+${radOut}</div>
-                            <div class="radiation-label">(чем больше, тем лучше)</div>
                         </div>
                         <div class="radiation-item radiation-bad">
-                            <div class="radiation-label">☢️ Накопление радиации</div>
+                            <div class="radiation-label">Накопление радиации</div>
                             <div class="radiation-value">+${radIn}</div>
-                            <div class="radiation-label">(чем меньше, тем лучше)</div>
+                        </div>
+                        <div class="radiation-item radiation-good">
+                            <div class="radiation-label">Защита от радиации</div>
+                            <div class="radiation-value">+${radProtection}</div>
+                        </div>
+                        <div class="radiation-item ${totalRadEffect >= 0 ? 'radiation-good' : 'radiation-bad'}">
+                            <div class="radiation-label">Суммарный эффект</div>
+                            <div class="radiation-value">${totalRadEffect > 0 ? '+' : ''}${totalRadEffect}</div>
                         </div>
                     </div>
                     <div class="radiation-total">
@@ -1524,7 +1880,7 @@
         // Поиск артефактов
         document.getElementById('searchArtifacts').addEventListener('input', function(e) {
             const searchTerm = e.target.value.toLowerCase();
-            const items = document.querySelectorAll('.artifact-item');
+            const items = document.querySelectorAll('#artifacts-tab .artifact-item');
             
             items.forEach(item => {
                 const name = item.querySelector('.artifact-name').textContent.toLowerCase();
@@ -1536,10 +1892,27 @@
             });
         });
 
+        // Поиск одежды
+        document.getElementById('searchClothing').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('#clothing-tab .clothing-item');
+            
+            items.forEach(item => {
+                const name = item.querySelector('.clothing-name').textContent.toLowerCase();
+                if (name.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
         // Очистка выбора
         function clearSelection() {
             selectedArtifacts = {};
+            selectedClothing = {};
             updateSelectedArtifactsDisplay();
+            updateSelectedClothingDisplay();
             updateCounters();
             document.getElementById('statsPanel').style.display = 'none';
             
@@ -1551,12 +1924,12 @@
 
         // Расчет статистики
         function calculateStats() {
-            if (Object.keys(selectedArtifacts).length === 0) {
-                alert('Выберите хотя бы один артефакт!');
+            if (Object.keys(selectedArtifacts).length === 0 && Object.keys(selectedClothing).length === 0) {
+                alert('Выберите хотя бы один артефакт или предмет одежды!');
                 return;
             }
 
-            const { totalStats, positiveEffects, negativeEffects } = calculateBuildStats(selectedArtifacts);
+            const { totalStats, positiveEffects, negativeEffects } = calculateBuildStats(selectedArtifacts, selectedClothing);
             displayStats(totalStats, positiveEffects, negativeEffects);
         }
 
@@ -1568,14 +1941,16 @@
             // Анализ радиации
             const radOut = totalStats.вывод_радиации || 0;
             const radIn = totalStats.накопление_радиации || 0;
-            const netRadiation = radOut - radIn;
+            const radProtection = totalStats.защита_радиации || 0;
+            const netRadiation = radOut - radIn + radProtection;
 
             // Отображаем информацию о радиации
-            document.getElementById('radiationInfo').innerHTML = displayRadiationInfo(radOut, radIn, netRadiation);
+            document.getElementById('radiationInfo').innerHTML = displayRadiationInfo(radOut, radIn, radProtection, netRadiation);
 
             // Общая статистика
             const totalArtifactsCount = Object.values(selectedArtifacts).reduce((sum, count) => sum + count, 0);
             const uniqueArtifactsCount = Object.keys(selectedArtifacts).length;
+            const clothingCount = Object.keys(selectedClothing).length;
             
             const totalStatsElement = document.getElementById('totalStats');
             totalStatsElement.innerHTML = `
@@ -1590,7 +1965,11 @@
                 <div class="stat-card">
                     <div>⚡ Всего артефактов</div>
                     <div class="stat-value-large">${totalArtifactsCount}</div>
-                    <div style="font-size: 0.8em; color: #888;">${uniqueArtifactsCount} уникальных</div>
+                    <div style="font-size: 0.9em; color: #888;">${uniqueArtifactsCount} уникальных</div>
+                </div>
+                <div class="stat-card">
+                    <div>👕 Предметов одежды</div>
+                    <div class="stat-value-large">${clothingCount}</div>
                 </div>
             `;
 
@@ -1630,6 +2009,9 @@
             const names = {
                 "вывод_радиации": "Вывод радиации",
                 "накопление_радиации": "Накопление радиации", 
+                "защита_радиации": "Защита от радиации",
+                "защита_удара": "Защита от удара",
+                "вместимость": "Вместимость",
                 "вода": "Вода",
                 "еда": "Еда",
                 "кровь": "Кровь",
@@ -1644,6 +2026,7 @@
         // Инициализация при загрузке
         document.addEventListener('DOMContentLoaded', function() {
             initArtifactList();
+            initClothingList();
             updateCounters();
             updateSavedBuildsList();
         });
